@@ -14,16 +14,27 @@ hbs.registerPartials(__dirname + '/views/partials')
 //Motor de plantillas
 app.set('view engine', 'hbs')
 
+//helpers
+hbs.registerHelper('getAnnio', () => {
+    return new Date().getFullYear()
+})
+
+hbs.registerHelper('upperWord', (text) => {
+    let words = text.split(' ')
+
+    words.forEach((word, idx) => {
+        words[idx] = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    });
+    return words.join(' ')
+})
 
 app.get('/', (req, res) => {
     res.render('home', {
-        anio: new Date().getFullYear()
     })
 })
 
 app.get('/about',(req, res) => {
     res.render('about', {
-        anio: new Date().getFullYear()
     })
 })
 
